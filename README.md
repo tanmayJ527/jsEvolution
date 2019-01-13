@@ -3,7 +3,8 @@ This project uses JavaScript and HTML to simulate affects of two of the forces o
 Instructions: <br>
   Go to the page https://tanmay-chanakya.github.io/jsEvolution/home.html <br>
   Follow the steps on the webpages. <br>
-  
+
+Project walkthrough video:
 https://youtu.be/6AyJZJjNx0A <br> 
 Note:
 <p>Even after several attempts, I could not include audio to the screencast. I will soon add relevant subtitles to the video.</p> 
