@@ -5,4 +5,5 @@ Instructions: <br>
   Follow the steps on the webpages. <be>
   
   
-Project report coming soon... (will be put before 13th January 23:59)
+Note:
+<p>Even after several attempts, I could not include audio to the screencast. I will soon add relevant subtitles to the video.</p> 
