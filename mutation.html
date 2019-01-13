@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+
+    </head>
+    <body>
+            <script>
+                    const bases = ['A', 'G', 'C', 'T'];
+                    
+                    let sequenceLength = prompt("enter length of sequence");
+                    let originalSequence = [];
+                    let numberOfSequences = prompt("enter number of sequences");
+                    let sequences = []; //population
+                    let numberOfGenerations = prompt("enter number of generations");
+                    let mutationRate = prompt("enter mutation rate");   //per base and generation            
+                    
+                    function generateFirstGeneration()
+                    {
+                        generateFirstSequence();
+                        for (let i=0; i<numberOfSequences; i++)
+                        {
+                            sequences.push(originalSequence.slice());
+                        }
+                    }
+        
+                    function generateFirstSequence()
+                    {
+                        for (var i=0; i<sequenceLength; i++)
+                        {
+                            originalSequence.push(randomBase(""));
+                        }
+                    }
+        
+                    function randomBase(currentBase)
+                    {
+                        let newBase;
+                        do {
+                            newBase = bases[Math.floor(Math.random()*4)];
+                        } while(currentBase == newBase);
+                        return newBase;
+                    }
+                    
+                    function printSequences(expression)
+                    {
+                        document.writeln(expression);
+                        document.write('<br>');
+                        for (let i=0; i<numberOfSequences; i++)
+                        {
+                            printSequence(sequences[i]); 
+                            document.write('<br>');
+                        }
+                        document.write('<br>');
+                    }
+        
+                    function printSequence(array)
+                    {
+                        let string = "";
+                        for (let i=0; i<array.length; i++)
+                        {
+                            string = string + array[i];
+                        }
+                        document.writeln(string);
+                        
+                    }
+        
+                    function runGenerations()
+                    {
+                        for (let i=0; i<numberOfGenerations; i++)
+                        {
+                            //each generation
+                            for (let j=0; j<numberOfSequences; j++)
+                            {
+                                //each sequence
+                                for (let k=0; k<sequenceLength; k++)
+                                {
+                                    //each base
+                                    if (Math.random()<mutationRate)
+                                    {
+                                        sequences[j][k] = randomBase(sequences[j][k]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+        
+                    generateFirstGeneration();
+                    printSequences("Generation 0: ");
+                    runGenerations();
+                    printSequences(`After ${numberOfGenerations} generations: `);
+        
+        
+                </script>
+    </body>
+</html>

@@ -1,0 +1,123 @@
+<html>
+    <head>
+        <title>Genetic Drift</title>
+        
+    </head>
+    <body>        
+        <p>Genetic drift is defined as the change in allele frequencies over time due to chance
+        and chance alone. A population's allele frequency is the fraction of the copies of one gene that share a particular form.
+        <a href="https://en.wikipedia.org/wiki/Genetic_drift" target = "_blank">Wikipedia</a>
+        </p>
+        <p>
+            Genetic drift has a negative impact on variation, i.e, it acts towards reducing genetic variation. 
+        </p>
+        <canvas id = "myCanvas" width = "1800" height = "500"></canvas>
+        <button onclick = "geneticDrift()">Run simulation</button>
+        
+        <script>
+            var canvas = document.getElementById("myCanvas");
+            var ctx = canvas.getContext("2d");
+            
+            //var x = document.getElementById("form1");
+            //var numberOfGenerations = document.getElementById("nog").value;
+            var numberOfGenerations = prompt("enter number of generations"); //number of generations after 0th
+            var P = prompt("enter initial frequency/fraction of allele a1 (some value between 0 and 1)");
+            
+            
+            function geneticDrift()
+            {
+            
+                //var p = 0.5; //take input from user
+                //var N = 1000; //population size, take input from user
+                var N = prompt("enter population size");
+                var p = 1-P;                
+                
+
+                var data = [];
+                var populationSizes = [];
+
+                function harmonicMean(array)      
+                {
+                    var denominator = 0;
+                    for (let i=0; i<array.length; i++)
+                    {
+                        denominator += 1/array[i];
+                    }
+                    return Math.round(array.length / denominator);
+                }
+                       
+                function produceNextGeneration(Ne) 
+                {
+                    let draws = 2*Ne;
+                    var a1 = 0;             //inital frequencies of a1 and a2 in new generation
+                    var a2 = 0;
+
+                    for (let i=0; i<draws; i++)
+                    {
+                        if (Math.random() < p) {a1++;}
+                        else {a2++;}
+                    }
+                    
+                    return a1/draws;
+                }
+                
+                //simulation
+                for (let i=0; i<numberOfGenerations; i++)
+                {
+                    data.push(p);
+                    populationSizes.push(N);
+                    p = produceNextGeneration(N);
+                    //console.log(p)
+                }
+                var Ne = harmonicMean(populationSizes);
+ 
+                
+                let width = myCanvas.width-30;               
+                let factor = width / numberOfGenerations;
+                
+                ctx.moveTo(200, 0);
+                ctx.lineTo(200, myCanvas.height - 200);
+                ctx.lineTo(width + 200, myCanvas.height - 200);
+                ctx.strokeStyle = "blue";
+                ctx.lineWidth = 0.1;
+                ctx.stroke();
+                
+
+                ctx.font = "30px Arial";
+                ctx.fillText("Generation", 900, 300+50);
+                ctx.font = "50px Arial";
+                ctx.fillText("p", 90, 150);
+                ctx.font = "12px Arial";
+                let y = 0;                         
+                for (let i=0; i<10; i++)
+                {
+                    ctx.fillText(y.toFixed(1), 170, 300 - 30*i);
+                    y = y + 0.1;
+                }
+                ctx.fillText(numberOfGenerations, width, 300+15);
+                if (numberOfGenerations%2 ===0) {ctx.fillText(numberOfGenerations/2, width/2 + 50, 300+15);}
+                else {ctx.fillText(numberOfGenerations/2 +0.5, width/2 + 50, 300+15);}
+
+                
+                for (let i=0; i<data.length; i++)
+                {
+                    ctx.moveTo(i*factor+10+200, data[i]*300);
+                    ctx.lineTo((i+1)*factor+10+200, data[i+1]*300);
+                    ctx.strokeStyle = "blue"
+                    if (numberOfGenerations > 50) {ctx.lineWidth = 0.01;}
+                    else {ctx.lineWidth = 0.1;}
+
+                    ctx.stroke();
+                } 
+            }
+
+        </script>
+    
+        <p>Observe the graphs for different population sizes. More is the population size (sample space), less is the 'variation-reducing effect' of Genetic drift.</p>
+        <p>Smaller the population, earlier will the alleles drift to fixation (complete wipeout of 1 allele).</p><br>
+        <p>Had genetic drift been the only force in action, there would have been no genetic variation. But we know that this is not what happens. 
+            We observe so much variety around us. So let's now take a look at <a href="https://tanmay-chanakya.github.io/jsEvolution/mutationIntro.html">mutation</a>.
+        </p>
+
+    </body>
+</html>
