@@ -7,6 +7,6 @@ Instructions: <br>
 Project walkthrough video:
 https://youtu.be/6AyJZJjNx0A <br> 
 <p>Note: <br>
-Even after several attempts, I could not include audio to the screencast. I will soon add relevant subtitles to the video.
+Even after several attempts, I could not include audio to the screencast. I will soon add relevant subtitles to the video.<br>
 Edit: Subtitles added. Don't forget to turn on subtitles while watching.
 </p> 
